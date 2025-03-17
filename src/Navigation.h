@@ -14,7 +14,7 @@ private:
 public:
     Navigation(){};
 
-    void init();
+    void init(Recipes*);
     bool updateDisplay(const char *&buff);
     bool lock();
     bool executeRecipe();

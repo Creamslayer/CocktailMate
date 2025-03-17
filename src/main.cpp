@@ -1,3 +1,5 @@
+#ifndef UNIT_TEST
+
 #include <Arduino.h>
 #include <Wire.h>
 #include <SSD1306Ascii.h>
@@ -30,10 +32,10 @@ const char *currentRecipe;
 void setup()
 {
 
-  Serial.begin(115200);
+  Serial.begin(74880);
 
   recipes.init();
-  navigation.init();
+  navigation.init(&recipes);
 
   Wire.begin();
   Wire.setClock(100000);
@@ -196,3 +198,6 @@ int cocktail()
   state = ENTER_IDLE;
   return 0;
 }
+
+
+#endif

@@ -2,11 +2,10 @@
 
 #include "Navigation.h"
 
-extern Recipes recipes;
 
 const char* test = "test";
 
-void Navigation::init()
+void Navigation::init(Recipes *recipes)
 {
     pinMode(NAVIGATE_UP, INPUT_PULLUP);
     pinMode(NAVIGATE_DOWN, INPUT_PULLUP);
@@ -14,7 +13,7 @@ void Navigation::init()
     pinMode(KEYSWITCH, INPUT_PULLUP);
     pinMode(CLEANING_BUTTON, INPUT_PULLUP);
 
-    recipes.getAllNames(this->allCocktails);
+    recipes->getAllNames(this->allCocktails);
 
     currentCocktail = 0;
     lastPress = 0;
