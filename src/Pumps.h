@@ -3,7 +3,6 @@
 #include "Pump.h"
 #include "config.h"
 
-
 class Pumps
 {
 
@@ -18,6 +17,7 @@ public:
     Pumps() {};
     long pump(const char *, long);
     bool update();
+    void clean(unsigned long);
 
 private:
     Pump *getPump(const char *);

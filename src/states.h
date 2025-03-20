@@ -1,6 +1,7 @@
 #pragma once
 
-enum States {
+enum States
+{
     ENTER_LOCK,
     LOCK,
     ENTER_IDLE,

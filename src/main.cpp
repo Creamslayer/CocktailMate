@@ -42,12 +42,12 @@ void setup()
 
   delay(1000);
 
-  // oledPH.begin(&Adafruit128x64, //oledPH_ADDRESS);
-  // oledPH.setFont(System5x7);
-  // oledPH.clear();
-  // oledPH.set1X();
-  // oledPH.println(F("Cocktail Bar v1.1"));
-  // oledPH.println(F("Ready!"));
+  oled.begin(&Adafruit128x64, OLED_ADDRESS);
+  oled.setFont(System5x7);
+  oled.clear();
+  oled.set1X();
+  oled.println(F("Cocktail Bar v1.1"));
+  oled.println(F("Ready!"));
   Serial.println("Starting in 1 seconds.");
   delay(1000);
 }
@@ -88,10 +88,10 @@ int enter_lock()
 {
   Serial.println("Enter Lock");
 
-  // oledPH.clear();
-  // oledPH.setCursor(0, 0);
-  // oledPH.println(F("System locked"));
-  // oledPH.println(F("Turn key to start"));
+  oled.clear();
+  oled.setCursor(0, 0);
+  oled.println(F("System locked"));
+  oled.println(F("Turn key to start"));
 
   state = LOCK;
   return 0;
@@ -112,12 +112,12 @@ int enter_idle()
 {
   Serial.println("Enter Idle Select Cocktail");
 
-  // oledPH.clear();
-  // oledPH.setCursor(0, 0);
-  // oledPH.println(F("Select cocktail:"));
+  oled.clear();
+  oled.setCursor(0, 0);
+  oled.println(F("Select cocktail:\n"));
 
   navigation.updateDisplay(currentRecipe);
-  // oledPH.println(currentRecipe);
+  oled.println(currentRecipe);
   Serial.println(currentRecipe);
 
   state = IDLE;
@@ -129,10 +129,10 @@ int idle()
 
   if (navigation.updateDisplay(currentRecipe))
   {
-    // oledPH.setCursor(1, 0);
-    // oledPH.print("                   ");
-    // oledPH.setCursor(1, 0),
-    // oledPH.println(currentRecipe);
+    oled.setCursor(0, 2);
+    oled.print("                   ");
+    oled.setCursor(0, 2),
+        oled.println(currentRecipe);
     Serial.println(currentRecipe);
   }
 
@@ -159,10 +159,10 @@ int enter_cleaning()
 {
   Serial.println("\nEnter Cleaning");
 
-  // oledPH.clear();
-  // oledPH.setCursor(0, 0);
-  // oledPH.println(F("Cleaning........"));
-  // oledPH.println();
+  oled.clear();
+  oled.setCursor(0, 0);
+  oled.println(F("Cleaning........"));
+  oled.println();
 
   state = CLEANING;
   return 0;
@@ -174,9 +174,9 @@ int cleaning()
 
   for (int x = 0; x < 15; x++)
   {
-    delay(1000);
-    // oledPH.print(".");
+    oled.print(".");
     Serial.print(".");
+    pumps.clean(1000);
   }
   Serial.println();
 
@@ -189,15 +189,14 @@ int cocktail()
   Serial.println("Enter Cocktail");
   Serial.println(currentRecipe);
 
-  // oledPH.clear();
-  // oledPH.setCursor(0,0);
-  // oledPH.println("Recipe:");
-  // oledPH.println(currentRecipe);
+  oled.clear();
+  oled.setCursor(0, 0);
+  oled.println("Recipe:");
+  oled.println(currentRecipe);
 
   recipes.execute(currentRecipe);
   state = ENTER_IDLE;
   return 0;
 }
-
 
 #endif

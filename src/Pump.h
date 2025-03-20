@@ -4,14 +4,14 @@
 class Pump
 {
 private:
-    const char* name;
+    const char *name;
     int pin;
     long start_time;
     long target_time;
     long rate;
 
 public:
-    Pump(const char* name, int pin, long rate);
+    Pump(const char *name, int pin, long rate);
 
     long turnOn(long ms);
 
@@ -21,5 +21,5 @@ public:
 
     void turnOff();
 
-    const char* getName();
+    const char *getName();
 };

@@ -1,18 +1,18 @@
 #pragma once
-#define MAX_INGEDIENTS 4
+#define MAX_INGREDIENTS 4
 class Recipe
 {
 private:
     const char *name;
-    const char **phase1_ingredients;
-    long *phase1_amounts;
+    const char *const *phase1_ingredients;
+    const long *phase1_amounts;
 
-    const char **phase2_ingredients;
-    long *phase2_amounts;
+    const char *const *phase2_ingredients;
+    const long *phase2_amounts;
 
 public:
     Recipe() {};
-    Recipe(const char *name, const char **phase1_ingredients, long *phase1_amounts, const char **phase2_ingredients, long *phase2_amounts);
+    Recipe(const char *name, const char *const *phase1_ingredients, const long *phase1_amounts, const char *const *phase2_ingredients, const long *phase2_amounts);
     void execute();
-    const char* getName();
+    const char *getName();
 };

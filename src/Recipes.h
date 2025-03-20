@@ -3,18 +3,13 @@
 
 #define RECIPE_COUNT 2
 
-
 class Recipes
 {
 private:
-    Recipe recipes[RECIPE_COUNT];
-
 public:
-    Recipes(){};
+    Recipes() {};
 
     void init();
-    void execute(const char*);
-    void getAllNames(const char** buff);
-
-
+    void execute(const char *);
+    void getAllNames(const char **buff);
 };

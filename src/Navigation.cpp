@@ -2,8 +2,7 @@
 
 #include "Navigation.h"
 
-
-const char* test = "test";
+const char *test = "test";
 
 void Navigation::init(Recipes *recipes)
 {
@@ -22,8 +21,6 @@ void Navigation::init(Recipes *recipes)
 bool Navigation::updateDisplay(const char *&buff)
 {
     buff = allCocktails[currentCocktail];
-
-
 
     if (millis() < lastPress + DEBOUNCE_TIME)
         return false;
@@ -44,9 +41,6 @@ bool Navigation::updateDisplay(const char *&buff)
         return true;
     }
 
-    
-
-    
     return false;
 }
 

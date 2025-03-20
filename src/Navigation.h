@@ -10,11 +10,10 @@ private:
     const char *allCocktails[RECIPE_COUNT];
     long unsigned lastPress;
 
-
 public:
-    Navigation(){};
+    Navigation() {};
 
-    void init(Recipes*);
+    void init(Recipes *);
     bool updateDisplay(const char *&buff);
     bool lock();
     bool executeRecipe();
