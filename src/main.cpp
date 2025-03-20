@@ -22,10 +22,12 @@ int enter_cleaning();
 int cleaning();
 int enter_cocktail();
 int cocktail();
+int calibrate_pumps();
 
 Recipes recipes;
 Pumps pumps;
 Navigation navigation;
+bool calibrated = false;
 
 const char *currentRecipe;
 
@@ -80,6 +82,9 @@ void loop()
   case COCKTAIL:
     cocktail();
     break;
+  case CALIBRATE_PUMPS:
+    calibrate_pumps();
+    break;
   default:
     break;
   }
@@ -111,6 +116,11 @@ int lock()
 
 int enter_idle()
 {
+  if (!calibrated)
+  {
+    state = CALIBRATE_PUMPS;
+    return 0;
+  }
   Serial.println("Enter Idle Select Cocktail");
 
   oled.clear();
@@ -204,6 +214,30 @@ int cocktail()
   oled.println(currentRecipe);
 
   recipes.execute(currentRecipe);
+  state = ENTER_IDLE;
+  return 0;
+}
+
+int calibrate_pumps()
+{
+
+  for (int x = 0; x < PUMP_COUNT; x++)
+  {
+    oled.clear();
+    oled.println("PUMP:");
+    oled.println(x);
+
+    while (digitalRead(NAVIGATE_ENTER))
+    {
+      delay(50);
+    }
+
+    while (!digitalRead(NAVIGATE_ENTER))
+    {
+      pumps.pump(x);
+    }
+  }
+  calibrated = true;
   state = ENTER_IDLE;
   return 0;
 }

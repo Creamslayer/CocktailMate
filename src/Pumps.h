@@ -16,6 +16,7 @@ private:
 public:
     Pumps() {};
     long pump(const char *, long);
+    void pump(int);
     bool update();
     void clean(unsigned long);
 

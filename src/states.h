@@ -8,5 +8,6 @@ enum States
     IDLE,
     ENTER_CLEANING,
     CLEANING,
-    COCKTAIL
+    COCKTAIL,
+    CALIBRATE_PUMPS
 };

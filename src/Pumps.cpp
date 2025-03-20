@@ -53,3 +53,10 @@ void Pumps::clean(unsigned long time)
         this->pumps[x].turnOff();
     }
 }
+
+void Pumps::pump(int idx)
+{
+    this->pumps[idx].turnOn();
+    delay(50);
+    this->pumps[idx].turnOff();
+}
