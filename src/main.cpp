@@ -45,8 +45,9 @@ void setup()
   oled.begin(&Adafruit128x64, OLED_ADDRESS);
   oled.setFont(System5x7);
   oled.clear();
-  oled.set1X();
-  oled.println(F("Cocktail Bar v1.1"));
+  oled.set2X();
+  oled.println(F("Cocktail"));
+  oled.println("Bar v1.1");
   oled.println(F("Ready!"));
   Serial.println("Starting in 1 seconds.");
   delay(1000);
@@ -90,8 +91,8 @@ int enter_lock()
 
   oled.clear();
   oled.setCursor(0, 0);
-  oled.println(F("System locked"));
-  oled.println(F("Turn key to start"));
+  oled.println(F("LOCKED\n"));
+  oled.println(F("Turn key!"));
 
   state = LOCK;
   return 0;
@@ -114,7 +115,7 @@ int enter_idle()
 
   oled.clear();
   oled.setCursor(0, 0);
-  oled.println(F("Select cocktail:\n"));
+  oled.println(F("Select\nCocktail:\n"));
 
   navigation.updateDisplay(currentRecipe);
   oled.println(currentRecipe);
@@ -129,9 +130,9 @@ int idle()
 
   if (navigation.updateDisplay(currentRecipe))
   {
-    oled.setCursor(0, 2);
+    oled.setCursor(0, 6);
     oled.print("                   ");
-    oled.setCursor(0, 2),
+    oled.setCursor(0, 6),
         oled.println(currentRecipe);
     Serial.println(currentRecipe);
   }
@@ -172,15 +173,23 @@ int cleaning()
 {
   Serial.println("\nCleaning.......");
 
-  for (int x = 0; x < 15; x++)
+  for (int x = 0; !navigation.lock(); x++)
   {
     oled.print(".");
     Serial.print(".");
     pumps.clean(1000);
+
+    if (x >= 10)
+    {
+      oled.setCursor(0, 4);
+      oled.print("                  ");
+      oled.setCursor(0, 4);
+      x = 0;
+    }
   }
   Serial.println();
 
-  state = ENTER_IDLE;
+  state = ENTER_LOCK;
   return 0;
 }
 
